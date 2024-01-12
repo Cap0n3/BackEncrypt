@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Small script to create a tar archive of a source path and encrypt/decrypt it with a password from a file.
+# A small Bash script utility for creating a tar archive of a folder and encrypting/decrypting it with a password stored in a file.
 #
 # Usage for encryption: ./BackEncrypt.sh <source_folder_path> <destination_folder_path> <password_file>
 # Usage for decryption: ./BackEncrypt.sh --decrypt <encrypted_archive_path> <destination_folder_path> <password_file>
@@ -47,9 +47,6 @@ decrypt_and_extract() {
         exit 1
     fi
 
-    # Create a timestamp for the decrypted archive file
-    local timestamp=$(date +"%Y%m%d_%H%M%S")
-
     # Set the decrypted archive file name
     local decrypted_archive="$destination_path/decrypted_archive_$timestamp.tar.gz"
 
@@ -88,7 +85,6 @@ source_path="$1"
 destination_path="$2"
 password_file="$3"
 
-
 # Check if the source path exists
 if [ ! -e "$source_path" ]; then
     print_error "Error: Source path does not exist."
@@ -101,7 +97,6 @@ if [ ! -e "$destination_path" ]; then
     exit 1
 fi
 
-
 # Check if the password file exists
 if [ ! -e "$password_file" ]; then
     print_error "Error: Password file does not exist."
@@ -113,13 +108,16 @@ fi
 # ==================== #
 
 # Create a timestamp for the archive file
-timestamp=$(date +"%Y%m%d_%H%M%S")
+timestamp=$(date +"%Y-%m-%d_%H%M%S")
+
+# Get name of folder of source path
+source_folder_name=$(basename "$source_path")
 
 # Set the archive file name
 archive_file="$destination_path/archive_$timestamp.tar.gz"
 
 # Set the encrypted archive file name
-encrypted_archive="$destination_path/encrypted_archive_$timestamp.tar.gz.enc"
+encrypted_archive="$destination_path/${source_folder_name}_$timestamp.tar.gz.enc"
 
 # Create a tar archive of the source path
 tar -czf "$archive_file" "$source_path"

@@ -1,6 +1,6 @@
 # BackEncrypt.sh
 
-A small Bash script for creating a tar archive of a source path and encrypting/decrypting it with a password from a file.
+A small Bash script utility for creating a tar archive of a folder and encrypting/decrypting it with a password stored in a file.
 
 ## Prerequisites
 
