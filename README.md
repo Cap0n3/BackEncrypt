@@ -23,6 +23,8 @@ sudo yum install openssl
 ./BackEncrypt.sh <source_folder_path> <destination_folder_path> <password_file>
 ```
 
+For example, an encrypted file name might look like `encrypted_archive_2024-01-12_024523.tar.gz.enc`, representing an encrypted archive created on January 12, 2024, at 2:45:23 PM.
+
 ### Decryption
 
 ```bash
